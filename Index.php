@@ -128,7 +128,7 @@
             </div>
 
             <div class="form-group">
-             <button type="submit" class="btn btn-block btn-primary" name="btn-login">Sign In</button>
+             <button type="submit" class="btn btn-block btn-primary" name="btn-login">Ingresar</button>
             </div>
 
             <div class="form-group">
@@ -136,7 +136,7 @@
             </div>
 
             <div class="form-group">
-             <a href="register.php">Sign Up Here...</a>
+             <a href="register.php">Registrate aca...</a>
             </div>
 
         </div>

@@ -163,7 +163,7 @@
             </div>
 
             <div class="form-group">
-             <button type="submit" class="btn btn-block btn-primary" name="btn-signup">Sign Up</button>
+             <button type="submit" class="btn btn-block btn-primary" name="btn-signup">Registrar</button>
             </div>
 
             <div class="form-group">
@@ -171,7 +171,7 @@
             </div>
 
             <div class="form-group">
-             <a href="index.php">Sign in Here...</a>
+             <a href="index.php">Inicia sesion</a>
             </div>
 
         </div>

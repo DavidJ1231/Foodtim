@@ -95,8 +95,7 @@
 
         <section id ="pricing" class="description_content">
              <div class="pricing background_content">
-                <!--<style #000000-->
-                <h1 style='color:black'> Nuestros productos</h1>
+               <h1 style='color:black'> Nuestros productos</h1>
              </div>
             <div class="text-content container">
                 <div class="container">
