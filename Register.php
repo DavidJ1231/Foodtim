@@ -41,7 +41,7 @@
    $emailError = "Please enter valid email address.";
   } else {
    // check email exist or not
-   $query = "SELECT email FROM usuarios WHERE email='$email'";
+   $query = "SELECT email FROM clientes WHERE email='$email'";
    $result = mysql_query($query);
    $count = mysql_num_rows($result);
    if($count!=0){
@@ -64,7 +64,7 @@
   // if there's no error, continue to signup
   if( !$error ) {
 
-   $query = "INSERT INTO usuarios(nombre,email,clave) VALUES('$name','$email','$password')";
+   $query = "INSERT INTO clientes(nombre,email,clave) VALUES('$name','$email','$password')";
    $res = mysql_query($query);
 
    if ($res) {
@@ -163,7 +163,7 @@
             </div>
 
             <div class="form-group">
-             <button type="submit" class="btn btn-block btn-primary" name="btn-signup">Registrar</button>
+             <button type="submit" class="btn btn-block btn-primary" name="btn-signup">Sign Up</button>
             </div>
 
             <div class="form-group">
@@ -171,7 +171,7 @@
             </div>
 
             <div class="form-group">
-             <a href="index.php">Inicia sesion</a>
+             <a href="index.php">Sign in Here...</a>
             </div>
 
         </div>

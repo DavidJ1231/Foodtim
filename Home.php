@@ -9,8 +9,52 @@
   exit;
  }
  // select loggedin usuarios detail
- $res=mysql_query("SELECT * FROM usuarios WHERE id=".$_SESSION['user']);
+ $res=mysql_query("SELECT * FROM clientes WHERE idCliente=".$_SESSION['user']);
  $userRow=mysql_fetch_array($res);
+?>
+
+<?php
+require_once 'producto.entidad.php';
+require_once 'producto.model.php';
+
+// Logica
+$alm = new Producto();
+$model = new ProductoModel();
+
+if(isset($_REQUEST['action']))
+{
+	switch($_REQUEST['action'])
+	{
+		case 'actualizar':
+			$alm->__SET('idProductos',              $_REQUEST['idProductos']);
+			$alm->__SET('nombre',          $_REQUEST['nombre']);
+			$alm->__SET('descripcion',        $_REQUEST['descripcion']);
+			$alm->__SET('precio',            $_REQUEST['precio']);
+			$alm->__SET('Categoria_idCategoria', $_REQUEST['Categoria_idCategoria']);
+
+			$model->Actualizar($alm);
+			break;
+
+		case 'registrar':
+			$alm->__SET('nombre',          $_REQUEST['nombre']);
+			$alm->__SET('descripcion',        $_REQUEST['descripcion']);
+			$alm->__SET('precio',            $_REQUEST['precio']);
+			$alm->__SET('Categoria_idCategoria', $_REQUEST['Categoria_idCategoria']);
+
+			$model->Registrar($alm);
+			break;
+
+		case 'eliminar':
+			$model->Eliminar($_REQUEST['idProductos']);
+			break;
+
+		case 'editar':
+			$alm = $model->Obtener($_REQUEST['idProductos']);
+			break;
+	}
+
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +73,7 @@
         <meta nombre="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link rel="icon" href="favicon-1.ico" type="image/x-icon">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     </head>
 
     <body>
@@ -82,7 +127,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="img-section">
-                       <img src="images/logo1.jpg" width="500" height="440">
+                       <img src="images/logo.jpg" width="500" height="440">
                        <div class="img-section-space"></div>
                     </div>
                 </div>
@@ -95,50 +140,55 @@
 
         <section id ="pricing" class="description_content">
              <div class="pricing background_content">
-               <h1 style='color:black'> Nuestros productos</h1>
-             </div>
-            <div class="text-content container">
-                <div class="container">
-                    <div class="row">
-                        <div id="w">
-                            <ul id="filter-list" class="clearfix">
-                                <li class="filter" data-filter="all">All</li>
-                                <li class="filter" data-filter="breakfast">Breakfast</li>
-                                <li class="filter" data-filter="special">Special</li>
-                                <li class="filter" data-filter="desert">Desert</li>
-                                <li class="filter" data-filter="dinner">Dinner</li>
-                            </ul><!-- @end #filter-list -->
-                            <ul id="portfolio">
-                                <li class="item breakfast"><img src="images/big-.jpg" alt="Food" >
-                                    <h2 class="white">$20</h2>
-                                </li>
+                <!--<style #000000-->
+                <h1 style='color:black'> Nuestros productos</h1>
+                <div class="pure-g">
+                  <div class="col-md-6 col-md-offset-3">
+                   <div class="pure-u-1-1">
 
-                                <li class="item dinner special"><img src="images/food_icon02.jpg" alt="Food" >
-                                    <h2 class="white">$20</h2>
-                                </li>
-                                <li class="item dinner breakfast"><img src="images/food_icon03.jpg" alt="Food" >
-                                    <h2 class="white">$18</h2>
-                                </li>
-                                <li class="item special"><img src="images/food_icon04.jpg" alt="Food" >
-                                    <h2 class="white">$15</h2>
-                                </li>
-                                <li class="item dinner"><img src="images/food_icon05.jpg" alt="Food" >
-                                    <h2 class="white">$20</h2>
-                                </li>
-                                <li class="item special"><img src="images/food_icon06.jpg" alt="Food" >
-                                    <h2 class="white">$22</h2>
-                                </li>
-                                <li class="item desert"><img src="images/food_icon07.jpg" alt="Food" >
-                                    <h2 class="white">$32</h2>
-                                </li>
-                                <li class="item desert breakfast"><img src="images/food_icon08.jpg" alt="Food" >
-                                    <h2 class="white">$38</h2>
-                                </li>
-                            </ul><!-- @end #portfolio -->
-                        </div><!-- @end #w -->
-                    </div>
-                </div>
-            </div>
+                     <div class="form-group">
+                      <a class="navbar-brand" href="producto.php">Editar</a>
+                     </div>
+
+                       <table class="pure-table pure-table-horizontal" style="width:125%;">
+                           <thead>
+                               <tr>
+                                   <th style="text-align:left;">Nombre</th>
+                                   <th style="text-align:left;">Descripcion</th>
+                                   <th style="text-align:left;">Precio</th>
+                                   <th style="text-align:left;">Categoria</th>
+                               </tr>
+                           </thead>
+                           <?php foreach($model->Listar() as $r): ?>
+                               <tr>
+                                   <td><?php echo $r->__GET('nombre'); ?></td>
+                                   <td><?php echo $r->__GET('descripcion'); ?></td>
+                                   <td><?php echo $r->__GET('precio'); ?></td>
+                                   <td><?php
+       														if ($r->__GET('Categoria_idCategoria') == 1)
+       														{
+       															  echo "Sandwich de Pollo";
+       														}
+       														elseif ($r->__GET('Categoria_idCategoria')== 2)
+       														{
+       															    echo "Sandwich de Carne";
+       														}
+       														elseif ($r->__GET('Categoria_idCategoria') == 3)
+       														{
+       															echo "Bebidas";
+       														}
+       														elseif ($r->__GET('Categoria_idCategoria') == 4)
+       														{
+       															echo 'Papas';
+       														}
+                                  ?></td>
+                               </tr>
+                           <?php endforeach; ?>
+                       </table>
+
+                   </div>
+               </div>
+             </div>
         </section>
 
             <!-- Contact Section -->
@@ -206,6 +256,9 @@
                 </div>
             </div>
         </section>
+
+
+
 
 
         <!-- ============ Footer Section  ============= -->

@@ -7,7 +7,7 @@
  define('DBHOST', 'localhost');
  define('DBUSER', 'root');
  define('DBPASS', '');
- define('DBNAME', 'Aplicacion');
+ define('DBNAME', 'aplicacion');
 
  $conn = mysql_connect(DBHOST,DBUSER,DBPASS);
  $dbcon = mysql_select_db(DBNAME);

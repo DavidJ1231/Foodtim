@@ -41,12 +41,12 @@
 
    $password = hash('sha256', $pass); // password hashing using SHA256
 
-   $res=mysql_query("SELECT id, nombre, clave FROM usuarios WHERE email='$email'");
+   $res=mysql_query("SELECT idCliente, nombre, clave FROM clientes WHERE email='$email'");
    $row=mysql_fetch_array($res);
    $count = mysql_num_rows($res); // if uname/pass correct it returns must be 1 row
 
    if( $count == 1 && $row['clave']==$password ) {
-    $_SESSION['user'] = $row['id'];
+    $_SESSION['user'] = $row['idCliente'];
     header("Location: home.php");
    } else {
     $errMSG = "Incorrect Credentials, Try again...";
@@ -128,7 +128,7 @@
             </div>
 
             <div class="form-group">
-             <button type="submit" class="btn btn-block btn-primary" name="btn-login">Ingresar</button>
+             <button type="submit" class="btn btn-block btn-primary" name="btn-login">Sign In</button>
             </div>
 
             <div class="form-group">
@@ -136,7 +136,7 @@
             </div>
 
             <div class="form-group">
-             <a href="register.php">Registrate aca...</a>
+             <a href="register.php">Sign Up Here...</a>
             </div>
 
         </div>
