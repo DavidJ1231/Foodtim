@@ -150,7 +150,7 @@ if(isset($_REQUEST['action']))
                       <a class="navbar-brand" href="producto.php">Editar</a>
                      </div>
 
-                       <table class="pure-table pure-table-horizontal" style="width:125%;">
+                       <table class="pure-table pure-table-horizontal" style="width:125%">
                            <thead>
                                <tr>
                                    <th style="text-align:left;">Nombre</th>
@@ -159,6 +159,7 @@ if(isset($_REQUEST['action']))
                                    <th style="text-align:left;">Categoria</th>
                                </tr>
                            </thead>
+                           <tbody id="scroll">
                            <?php foreach($model->Listar() as $r): ?>
                                <tr>
                                    <td><?php echo $r->__GET('nombre'); ?></td>
@@ -183,13 +184,14 @@ if(isset($_REQUEST['action']))
        														}
                                   ?></td>
                                </tr>
+                              <div class="form-group">
+                             </div>
                            <?php endforeach; ?>
+                           </tbody>
                        </table>
-
-                   </div>
-               </div>
-             </div>
-        </section>
+                     </div>
+                    </div>
+                  </div>
 
             <!-- Contact Section -->
       <section id="contact">
@@ -238,9 +240,7 @@ if(isset($_REQUEST['action']))
               </div>
           </div>
       </section>
-                </div><!-- End Inner -->
-            </div>
-        </section>
+
 
         <!-- Contact Form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>
@@ -271,14 +271,13 @@ if(isset($_REQUEST['action']))
                 <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
             </div>
         </footer>
-
+</section>
 
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"> </script>
         <script type="text/javascript" src="js/bootstrap.min.js" ></script>
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js/jquery.mixitup.min.js" ></script>
         <script type="text/javascript" src="js/main.js" ></script>
-
     </body>
 </html>
 <?php ob_end_flush(); ?>
